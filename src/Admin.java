@@ -8,9 +8,10 @@ public class Admin {
 
     static  Question[] questions;
     static int[] correctAnswer ;
-    String[] opt  = new String[4];
+
     Scanner scanner = new Scanner(System.in);
 
+    //To create questions by the admin for the Quiz
     public void createQuestion(int noOfQuestions) {
 
         questions = new Question[noOfQuestions];
@@ -29,10 +30,11 @@ public class Admin {
                    break;
                 }else{
 
-                    System.out.println("Hello Admin, Question Number can accepts numbers only. please enter the valid number ");
+                    System.out.println("Invalid, Question Number accepts numbers only. please enter the valid number ");
                     scanner.nextLine();   // why this-> because the when you press enter,it creates the empty string and that has been taken has a value for the next scanner (i.e)question
 
                 }
+               // scanner.nextLine();// explicitly need to clear the new line character which was entered previously
 
         }
 
@@ -41,8 +43,7 @@ public class Admin {
             String ques = scanner.nextLine();
 
             System.out.println("Enter the options");
-
-
+            String[] opt  = new String[4];
             for (int j = 0; j < opt.length; j++) {
 
                 System.out.print(j+1 +")" );
@@ -51,8 +52,21 @@ public class Admin {
             }
 
 
-            System.out.println("Enter the option numbers (1-4) ");
-            int answer = scanner.nextInt();
+            System.out.println("Enter the option numbers (1-4) to select the correct answer");
+            int answer=0;
+
+            while(true){
+
+                if(scanner.hasNextInt()){
+                     answer = scanner.nextInt();
+                     break;
+
+                }else{
+                    System.out.println("Invalid, answer accpets only values between (1-4) ");
+                    scanner.nextLine();
+                }
+            }
+
 
             correctAnswer [i]= answer;
             questions[i] = new Question(quesNo, ques, opt, answer);
@@ -62,29 +76,23 @@ public class Admin {
     }
 
 
+
+
     public void displayQuiz() {
 
         System.out.println("********************************************************");
         System.out.println("   ");
         System.out.println("The No of Questions entered by the admin  ");
 
-//        for (int i = 0; i < questions.length; i++) {
-//
-//            System.out.println(questions[i].getQuesNo() + ") " + questions[i].getQuestionDesc() + "? " );
-//
-//                for(int j=0;j< opt.length;j++){
-//                    System.out.println(j+1 +") " + opt[j] );
-//                }
-//
-//        }
-
         for(Question q: questions){
 
             System.out.println(q.getQuesNo() + ") " + q.getQuestionDesc() + "? " );
-            for(int i=0;i< opt.length;i++){
+            String[] op = q.getOptions();
+            for(int i=0;i<op.length;i++){
 
-                System.out.println(q.options[i]);
+                System.out.println(i+1 +")"+ op[i] );
             }
+
 
         }
 

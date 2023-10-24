@@ -4,7 +4,7 @@ public class Question {
 
     private int quesNo;
     private String questionDesc;
-    String[] options = new String[4];
+    private String[] options = new String[4];
     private int answer;
 
     public Question() {
@@ -26,9 +26,7 @@ public class Question {
     }
 
 
-//    public String getOptions() {
-//        return Arrays.toString(options);
-//    }
+
 
     public String[] getOptions(){
         return options;
