@@ -6,8 +6,8 @@ import java.util.Scanner;
 public class Admin {
 
 
-    static  Question[] questions;
-    static int[] correctAnswer ;
+    static Question[] questions;
+    static int[] correctAnswer;
 
     Scanner scanner = new Scanner(System.in);
 
@@ -18,65 +18,62 @@ public class Admin {
         correctAnswer = new int[noOfQuestions];
 
         for (int i = 0; i < questions.length; i++) {
-            int quesNo =0;
+            int quesNo = 0;
 
             //logic to make user enter int type for questionNo;
-            while(true){
+            while (true) {
 
                 System.out.println("Enter the questionNo");
                 //quesNo has to be only in int - validation required
-                if(scanner.hasNextInt()){
-                   quesNo = scanner.nextInt();
-                   break;
-                }else{
+                if (scanner.hasNextInt()) {
+                    quesNo = scanner.nextInt();
+                    break;
+                } else {
 
                     System.out.println("Invalid, Question Number accepts numbers only. please enter the valid number ");
                     scanner.nextLine();   // why this-> because the when you press enter,it creates the empty string and that has been taken has a value for the next scanner (i.e)question
 
                 }
-               // scanner.nextLine();// explicitly need to clear the new line character which was entered previously
+                // scanner.nextLine();// explicitly need to clear the new line character which was entered previously
 
-        }
+            }
 
             scanner.nextLine();
             System.out.println("Enter the question");
             String ques = scanner.nextLine();
 
             System.out.println("Enter the options");
-            String[] opt  = new String[4];
+            String[] opt = new String[4];
             for (int j = 0; j < opt.length; j++) {
 
-                System.out.print(j+1 +")" );
-                opt[j] =  scanner.nextLine();
+                System.out.print(j + 1 + ")");
+                opt[j] = scanner.nextLine();
 
             }
 
 
             System.out.println("Enter the option numbers (1-4) to select the correct answer");
-            int answer=0;
+            int answer = 0;
 
-            while(true){
+            while (true) {
 
-                if(scanner.hasNextInt()){
-                     answer = scanner.nextInt();
-                     break;
+                if (scanner.hasNextInt()) {
+                    answer = scanner.nextInt();
+                    break;
 
-                }else{
+                } else {
                     System.out.println("Invalid, answer accpets only values between (1-4) ");
                     scanner.nextLine();
                 }
             }
 
 
-            correctAnswer [i]= answer;
+            correctAnswer[i] = answer;
             questions[i] = new Question(quesNo, ques, opt, answer);
 
         }
 
     }
-
-
-
 
     public void displayQuiz() {
 
@@ -84,13 +81,21 @@ public class Admin {
         System.out.println("   ");
         System.out.println("The No of Questions entered by the admin  ");
 
-        for(Question q: questions){
+//        int[] qNo = new int[questions.length];
+//        for(int i=0;i< qNo.length;i++){
+//            qNo[i] = questions[i].getQuesNo();
+//        }
+//        Arrays.sort(qNo);
 
-            System.out.println(q.getQuesNo() + ") " + q.getQuestionDesc() + "? " );
+        for (Question q : questions) {
+
+            //ascending sort
+
+            System.out.println(q.getQuesNo() + ") " + q.getQuestionDesc() + "? ");
             String[] op = q.getOptions();
-            for(int i=0;i<op.length;i++){
+            for (int i = 0; i < op.length; i++) {
 
-                System.out.println(i+1 +")"+ op[i] );
+                System.out.println(i + 1 + ")" + op[i]);
             }
 
 
@@ -98,5 +103,14 @@ public class Admin {
 
     }
 
+
+    public void printCorrectAnswer() {
+
+        for (Question q : questions) {
+
+            System.out.println(q.getQuesNo() + ") " + q.getQuestionDesc() + "? " + " \n Correct Answer :" + q.getAnswer());
+
+        }
+    }
 
 }

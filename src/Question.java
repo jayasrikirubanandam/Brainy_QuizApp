@@ -26,11 +26,10 @@ public class Question {
     }
 
 
-
-
-    public String[] getOptions(){
+    public String[] getOptions() {
         return options;
     }
+
     public int getAnswer() {
         return answer;
     }
